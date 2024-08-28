@@ -1,6 +1,6 @@
 import { Switch } from "../ui/switch";
-import { BreadcrumbInternal } from "./breadcrumb";
-import { Profile } from "./profile";
+import { BreadcrumbInternal } from "../profile/breadcrumb";
+import { Profile } from "../profile/profile";
 
 
 export function Header() {

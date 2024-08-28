@@ -12,7 +12,7 @@ export function BreadcrumbInternal() {
 
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className='gap-0'>
         {pages.map((page, index) => {
           link += `/${page}`;
           return (

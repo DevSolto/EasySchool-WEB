@@ -3,12 +3,12 @@ import Link from "next/link"
 import { IconType } from "react-icons/lib";
 import { LuAlarmCheck, LuBarChartBig, LuBookCopy, LuDoorClosed, LuFile, LuMegaphone, LuUsers2 } from "react-icons/lu";
 
-type menuItem = {
+export type MenuItem = {
   label: string;
   link: string;
-  icon: IconType;
+  icon?: IconType;
 };
-const menuItens: menuItem[] = [
+const menuItens: MenuItem[] = [
   {
     label: "Dashboard",
     link: "/dashboard",
@@ -16,7 +16,7 @@ const menuItens: menuItem[] = [
   },
   {
     label: "Usuários",
-    link: "/dashboard/users",
+    link: "/dashboard/usuarios/listagem",
     icon: LuUsers2
   },
   {
@@ -58,7 +58,7 @@ export function Menu() {
                 <Link href={item.link} legacyBehavior passHref>
                   <NavigationMenuLink className={`${navigationMenuTriggerStyle()} text-base flex gap-2`}>
 
-                    <item.icon />
+                    {item.icon ? <item.icon /> : ''}
                     {item.label}
                   </NavigationMenuLink>
                 </Link>

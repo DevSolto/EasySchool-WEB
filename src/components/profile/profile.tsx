@@ -8,6 +8,7 @@ import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import { Feedback } from "./feedback";
 
 type User = {
   id: string;
@@ -36,25 +37,19 @@ export function Profile() {
 
   const name = user.name.split(" ");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
+
 
   return (
     <div className="flex gap-3 items-center">
       <p className="text-sm flex flex-col items-end">
-        {`${name[0]} ${name[1]}`}
+        {`${name[0]} ${name[1] ? name[1] : ""}`}
         <span className="text-muted-foreground text-xs capitalize">
           {user.role.toLowerCase()}
         </span>
       </p>
       <Popover>
         <PopoverTrigger asChild>
-          <Avatar>
+          <Avatar className="cursor-pointer">
             <AvatarImage src={user.avatarUrl} alt="Profile image" />
             <AvatarFallback>SS</AvatarFallback>
           </Avatar>
@@ -67,50 +62,7 @@ export function Profile() {
           <p className="text-center">
             Bem-vindo, <br /> <span className="font-bold">{user.name}</span>
           </p>
-          <Accordion type="multiple" className="w-full">
-            <AccordionItem value="1">
-              <AccordionTrigger>
-                Alterar informações
-              </AccordionTrigger>
-              <AccordionContent>
-                <form action="" method="post" className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="name">Nome</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={user.name}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="cpf">CPF</Label>
-                    <Input
-                      id="cpf"
-                      name="cpf"
-                      type="text"
-                      value={user.cpf}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="password">Senha</Label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="confirmPassword">Repita a senha</Label>
-                    <Input id="confirmPassword" name="confirmPassword" type="password" />
-                  </div>
-                  <Button type="submit">Editar</Button>
-                </form>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <Feedback />
         </PopoverContent>
       </Popover>
     </div>
